@@ -228,4 +228,4 @@ A configuração padrão usa `QUEUE_MODE=bullmq` com `REDIS_URL=redis://localhos
 
 ISC
 
-[Vídeo de Gerson](https://youtu.be/u3H8O8RJp3M?si=QgdfEQUHSrQe6u9x)
+[Gerson](https://youtu.be/u3H8O8RJp3M?si=QgdfEQUHSrQe6u9x)

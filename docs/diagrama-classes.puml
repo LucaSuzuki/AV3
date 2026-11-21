@@ -1,0 +1,188 @@
+@startuml
+skinparam packageStyle rectangle
+hide empty members
+
+package "domain" {
+  class Organizacao
+  class Contrato
+  class Lote
+  class Equipamento {
+    +atualizarStatus(novoEstado: EstadoFisico, justificativa: string, responsavel: string): void
+  }
+  class Movimentacao
+  class Usuario
+  interface Autenticavel {
+    +autenticar(usuario: string, senha: string): Promise<boolean>
+    +renovarToken(token: string): Promise<string>
+  }
+  abstract class Validador
+  class ValidadorCNPJ
+  class ValidadorDataEntrada
+  class TransicoesDominio
+  enum PapelUsuario
+  enum StatusLote
+  enum TipoEquipamento
+  enum EstadoFisico
+  enum StatusRastreamento
+  Validador <|-- ValidadorCNPJ
+  Validador <|-- ValidadorDataEntrada
+  Organizacao "1" -- "0..1" Contrato
+  Organizacao "1" -- "0..*" Lote
+  Lote "1" -- "0..*" Equipamento
+  Equipamento "1" -- "0..*" Movimentacao
+  Lote --> StatusLote
+  Equipamento --> TipoEquipamento
+  Equipamento --> EstadoFisico
+  Equipamento --> StatusRastreamento
+  Usuario --> PapelUsuario
+}
+
+package "modules / operação" {
+  class AuthService
+  class UsuarioService
+  class OrganizacaoService
+  class LoteService {
+    +transicionar()
+    +listar()
+  }
+  class EquipamentoService
+  class RelatorioService {
+    +porOrganizacao()
+    +porStatus()
+    +financeiro()
+    +resumo()
+  }
+  class AuditoriaService
+  class JournalTransacao <<Prisma>>
+  AuthService ..|> Autenticavel
+  LoteService --> EquipamentoService
+  LoteService --> AuditoriaService
+  EquipamentoService --> AuditoriaService
+  LoteService --> TransicoesDominio
+  AuditoriaService ..> JournalTransacao
+}
+
+package "modules / análises" {
+  interface "ServicoAnalitico<P,R>" as ServicoAnalitico
+  class AnalisesService
+  class EficienciaService
+  class RentabilidadeService
+  class VidaUtilService
+  class AvaliacaoPrevisoesService
+  class TransicaoLote <<Prisma>>
+  class ParametroRecuperacao <<Prisma>>
+  class ExecucaoAnalise <<Prisma>>
+  class MetricaEficiencia <<Prisma>>
+  class MetricaRentabilidade <<Prisma>>
+  class ModeloVidaUtil <<Prisma>>
+  class PrevisaoVidaUtil <<Prisma>>
+  enum TipoAnalise
+  enum OrigemExecucao
+  enum StatusExecucao
+  enum DimensaoEficiencia
+  enum NivelRentabilidade
+  enum FonteValor
+  enum ConfiancaModelo
+  EficienciaService ..|> ServicoAnalitico
+  RentabilidadeService ..|> ServicoAnalitico
+  VidaUtilService ..|> ServicoAnalitico
+  AnalisesService --> ServicoAnalitico
+  Lote "1" -- "0..*" TransicaoLote
+  LoteService ..> TransicaoLote
+  EficienciaService ..> TransicaoLote
+  RentabilidadeService ..> ParametroRecuperacao
+  VidaUtilService ..> ModeloVidaUtil
+  AvaliacaoPrevisoesService ..> PrevisaoVidaUtil
+  ExecucaoAnalise "1" -- "0..*" MetricaEficiencia
+  ExecucaoAnalise "1" -- "0..*" MetricaRentabilidade
+  ExecucaoAnalise "1" -- "0..*" ModeloVidaUtil
+  ExecucaoAnalise "1" -- "0..*" PrevisaoVidaUtil
+  ModeloVidaUtil "1" -- "0..*" PrevisaoVidaUtil
+  Equipamento "1" -- "0..*" PrevisaoVidaUtil
+  ExecucaoAnalise --> TipoAnalise
+  ExecucaoAnalise --> StatusExecucao
+  ExecucaoAnalise --> OrigemExecucao
+  MetricaEficiencia --> DimensaoEficiencia
+  MetricaRentabilidade --> NivelRentabilidade
+  MetricaRentabilidade --> FonteValor
+  ModeloVidaUtil --> ConfiancaModelo
+}
+
+package "modules / parceiros" {
+  class ParceiroService
+  class ChaveApiService
+  class ChaveApiHook
+  class PublicoService
+  class IdempotenciaService
+  class Parceiro <<Prisma>>
+  class ChaveApi <<Prisma>>
+  class ChaveIdempotencia <<Prisma>>
+  enum EscopoApi
+  ChaveApiHook --> ChaveApiService
+  ChaveApiService ..> ChaveApi
+  ParceiroService ..> Parceiro
+  PublicoService --> LoteService
+  PublicoService --> IdempotenciaService
+  IdempotenciaService ..> ChaveIdempotencia
+  Organizacao "1" -- "0..*" Parceiro
+  Parceiro "1" -- "0..*" ChaveApi
+  Parceiro "1" -- "0..*" ChaveIdempotencia
+  ChaveApi --> EscopoApi
+}
+
+package "infra / fila" {
+  interface FilaTrabalhos
+  class BullMQFila
+  class FilaInline
+  class Processadores
+  class Agendador
+  class Worker
+  class TarefaRelatorioService
+  class GeradorRelatorio
+  class TarefaRelatorio <<Prisma>>
+  enum FormatoRelatorio
+  BullMQFila ..|> FilaTrabalhos
+  FilaInline ..|> FilaTrabalhos
+  Worker --> Processadores
+  FilaInline --> Processadores
+  Agendador --> BullMQFila
+  Processadores --> AnalisesService
+  Processadores --> TarefaRelatorioService
+  Processadores --> AvaliacaoPrevisoesService
+  TarefaRelatorioService --> GeradorRelatorio
+  TarefaRelatorioService --> FilaTrabalhos
+  TarefaRelatorio --> FormatoRelatorio
+  TarefaRelatorio --> StatusExecucao
+  ExecucaoAnalise "0..1" -- "0..*" TarefaRelatorio
+  Parceiro "0..1" -- "0..*" TarefaRelatorio
+}
+package "infra / persistência" {
+  class BaseRepository
+  class UsuarioRepository
+  class OrganizacaoRepository
+  class RelatorioRepository
+  class LoteRepository
+  class EquipamentoRepository
+  class AnalisesRepository
+  class AuditoriaRepository
+  class ParceiroRepository
+  class ChaveApiRepository
+  class IdempotenciaRepository
+  class EficienciaRepository
+  class RentabilidadeRepository
+  class VidaUtilRepository
+  BaseRepository <|-- UsuarioRepository
+  BaseRepository <|-- OrganizacaoRepository
+  BaseRepository <|-- RelatorioRepository
+  BaseRepository <|-- LoteRepository
+  BaseRepository <|-- EquipamentoRepository
+  BaseRepository <|-- AnalisesRepository
+  BaseRepository <|-- AuditoriaRepository
+  BaseRepository <|-- ParceiroRepository
+  BaseRepository <|-- ChaveApiRepository
+  BaseRepository <|-- IdempotenciaRepository
+  BaseRepository <|-- EficienciaRepository
+  BaseRepository <|-- RentabilidadeRepository
+  BaseRepository <|-- VidaUtilRepository
+}
+@enduml

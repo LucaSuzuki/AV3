@@ -1,0 +1,4521 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Greencode API de parceiros",
+    "version": "1.0.0",
+    "description": "Rastreabilidade, lotes e relatórios da organização do parceiro."
+  },
+  "components": {
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      }
+    },
+    "schemas": {}
+  },
+  "paths": {
+    "/api/v1/public/me": {
+      "get": {
+        "operationId": "identificarParceiro",
+        "summary": "Identificar parceiro",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Consulta os escopos e o limite aplicados à chave enviada.",
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "parceiro": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "organizacaoId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "escopos": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 255
+                      }
+                    },
+                    "limiteReqMin": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/equipamentos": {
+      "get": {
+        "summary": "Listar equipamentos",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Lista os equipamentos da organização do parceiro.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Página solicitada, iniciando em 1."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "description": "Quantidade máxima de itens por página."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "COMPUTADOR_MESA",
+                "NOTEBOOK",
+                "MONITOR",
+                "IMPRESSORA",
+                "SERVIDOR",
+                "ROTEADOR",
+                "CABO_ESTRUTURADO",
+                "FONTE_ALIMENTACAO"
+              ]
+            },
+            "in": "query",
+            "name": "tipo",
+            "required": false,
+            "description": "Tipo do equipamento."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "AGUARDANDO_TRIAGEM",
+                "EM_TRIAGEM",
+                "AGUARDANDO_DESMONTE",
+                "EM_DESMONTE",
+                "PECAS_REAPROVEITADAS",
+                "MATERIAL_RECICLAVEL",
+                "DESCARTE_SEGURO",
+                "BAIXA_DEFINITIVA"
+              ]
+            },
+            "in": "query",
+            "name": "statusRastreamento",
+            "required": false,
+            "description": "Status atual do equipamento."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "query",
+            "name": "loteId",
+            "required": false,
+            "description": "Identificador do lote."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "codigoBarrasInterno": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Código de barras único do equipamento."
+                          },
+                          "tipo": {
+                            "type": "string",
+                            "enum": [
+                              "COMPUTADOR_MESA",
+                              "NOTEBOOK",
+                              "MONITOR",
+                              "IMPRESSORA",
+                              "SERVIDOR",
+                              "ROTEADOR",
+                              "CABO_ESTRUTURADO",
+                              "FONTE_ALIMENTACAO"
+                            ],
+                            "description": "Categoria do equipamento."
+                          },
+                          "marca": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Marca do fabricante."
+                          },
+                          "modelo": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Modelo comercial."
+                          },
+                          "anoFabricacao": {
+                            "type": "integer",
+                            "minimum": 1950,
+                            "maximum": 2100,
+                            "description": "Ano de fabricação."
+                          },
+                          "estadoFisico": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6,
+                            "description": "Condição física entre 0 e 6."
+                          },
+                          "pesoQuilogramas": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9999999.999,
+                            "multipleOf": 0.001,
+                            "description": "Peso em quilogramas."
+                          },
+                          "posicaoNoLote": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "Posição única dentro do lote."
+                          },
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "loteId": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "statusRastreamento": {
+                            "type": "string",
+                            "enum": [
+                              "AGUARDANDO_TRIAGEM",
+                              "EM_TRIAGEM",
+                              "AGUARDANDO_DESMONTE",
+                              "EM_DESMONTE",
+                              "PECAS_REAPROVEITADAS",
+                              "MATERIAL_RECICLAVEL",
+                              "DESCARTE_SEGURO",
+                              "BAIXA_DEFINITIVA"
+                            ]
+                          }
+                        },
+                        "required": []
+                      }
+                    },
+                    "page": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "page",
+                    "pageSize",
+                    "total"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/equipamentos/{codigoBarras}/rastreio": {
+      "get": {
+        "summary": "Rastrear equipamento",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Consulta o histórico cronológico de um equipamento pelo código de barras.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 255
+            },
+            "in": "path",
+            "name": "codigoBarras",
+            "required": true,
+            "description": "Código de barras interno do equipamento."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "equipamento": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "codigoBarrasInterno": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Código de barras único do equipamento."
+                        },
+                        "tipo": {
+                          "type": "string",
+                          "enum": [
+                            "COMPUTADOR_MESA",
+                            "NOTEBOOK",
+                            "MONITOR",
+                            "IMPRESSORA",
+                            "SERVIDOR",
+                            "ROTEADOR",
+                            "CABO_ESTRUTURADO",
+                            "FONTE_ALIMENTACAO"
+                          ],
+                          "description": "Categoria do equipamento."
+                        },
+                        "marca": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Marca do fabricante."
+                        },
+                        "modelo": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Modelo comercial."
+                        },
+                        "anoFabricacao": {
+                          "type": "integer",
+                          "minimum": 1950,
+                          "maximum": 2100,
+                          "description": "Ano de fabricação."
+                        },
+                        "estadoFisico": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 6,
+                          "description": "Condição física entre 0 e 6."
+                        },
+                        "pesoQuilogramas": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9999999.999,
+                          "multipleOf": 0.001,
+                          "description": "Peso em quilogramas."
+                        },
+                        "posicaoNoLote": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Posição única dentro do lote."
+                        },
+                        "id": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "loteId": {
+                          "type": "string",
+                          "format": "uuid"
+                        },
+                        "statusRastreamento": {
+                          "type": "string",
+                          "enum": [
+                            "AGUARDANDO_TRIAGEM",
+                            "EM_TRIAGEM",
+                            "AGUARDANDO_DESMONTE",
+                            "EM_DESMONTE",
+                            "PECAS_REAPROVEITADAS",
+                            "MATERIAL_RECICLAVEL",
+                            "DESCARTE_SEGURO",
+                            "BAIXA_DEFINITIVA"
+                          ]
+                        }
+                      },
+                      "required": []
+                    },
+                    "movimentacoes": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "dataHora": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "origem": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          },
+                          "destino": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          },
+                          "observacao": {
+                            "type": "string"
+                          }
+                        },
+                        "required": []
+                      }
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/lotes": {
+      "get": {
+        "summary": "Listar lotes",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Lista os lotes da organização do parceiro.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "in": "query",
+            "name": "page",
+            "required": false,
+            "description": "Página solicitada, iniciando em 1."
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            },
+            "in": "query",
+            "name": "pageSize",
+            "required": false,
+            "description": "Quantidade máxima de itens por página."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "RECEBIDO",
+                "EM_TRIAGEM",
+                "TRIAGEM_CONCLUIDA",
+                "ENCAMINHADO",
+                "FINALIZADO"
+              ]
+            },
+            "in": "query",
+            "name": "status",
+            "required": false,
+            "description": "Status de processamento do lote."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "dataInicio",
+            "required": false,
+            "description": "Data inicial inclusiva."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "in": "query",
+            "name": "dataFim",
+            "required": false,
+            "description": "Data final inclusiva."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "dataEntrada": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "notaFiscal": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          },
+                          "transportadora": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255
+                          },
+                          "observacoes": {
+                            "type": "string",
+                            "maxLength": 4000
+                          },
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "statusProcessamento": {
+                            "type": "string",
+                            "enum": [
+                              "RECEBIDO",
+                              "EM_TRIAGEM",
+                              "TRIAGEM_CONCLUIDA",
+                              "ENCAMINHADO",
+                              "FINALIZADO"
+                            ]
+                          },
+                          "equipamentos": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "additionalProperties": false,
+                              "properties": {
+                                "codigoBarrasInterno": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 255,
+                                  "description": "Código de barras único do equipamento."
+                                },
+                                "tipo": {
+                                  "type": "string",
+                                  "enum": [
+                                    "COMPUTADOR_MESA",
+                                    "NOTEBOOK",
+                                    "MONITOR",
+                                    "IMPRESSORA",
+                                    "SERVIDOR",
+                                    "ROTEADOR",
+                                    "CABO_ESTRUTURADO",
+                                    "FONTE_ALIMENTACAO"
+                                  ],
+                                  "description": "Categoria do equipamento."
+                                },
+                                "marca": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 255,
+                                  "description": "Marca do fabricante."
+                                },
+                                "modelo": {
+                                  "type": "string",
+                                  "minLength": 1,
+                                  "maxLength": 255,
+                                  "description": "Modelo comercial."
+                                },
+                                "anoFabricacao": {
+                                  "type": "integer",
+                                  "minimum": 1950,
+                                  "maximum": 2100,
+                                  "description": "Ano de fabricação."
+                                },
+                                "estadoFisico": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "maximum": 6,
+                                  "description": "Condição física entre 0 e 6."
+                                },
+                                "pesoQuilogramas": {
+                                  "type": "number",
+                                  "exclusiveMinimum": 0,
+                                  "maximum": 9999999.999,
+                                  "multipleOf": 0.001,
+                                  "description": "Peso em quilogramas."
+                                },
+                                "posicaoNoLote": {
+                                  "type": "integer",
+                                  "minimum": 1,
+                                  "description": "Posição única dentro do lote."
+                                },
+                                "id": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "loteId": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "statusRastreamento": {
+                                  "type": "string",
+                                  "enum": [
+                                    "AGUARDANDO_TRIAGEM",
+                                    "EM_TRIAGEM",
+                                    "AGUARDANDO_DESMONTE",
+                                    "EM_DESMONTE",
+                                    "PECAS_REAPROVEITADAS",
+                                    "MATERIAL_RECICLAVEL",
+                                    "DESCARTE_SEGURO",
+                                    "BAIXA_DEFINITIVA"
+                                  ]
+                                }
+                              },
+                              "required": []
+                            }
+                          },
+                          "pesoTotal": {
+                            "type": "number"
+                          }
+                        },
+                        "required": []
+                      }
+                    },
+                    "page": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "pageSize": {
+                      "type": "integer",
+                      "minimum": 1
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  },
+                  "required": [
+                    "items",
+                    "page",
+                    "pageSize",
+                    "total"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Submeter lote",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Cadastra o lote e seus equipamentos em uma única transação.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "notaFiscal": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "description": "Número da nota fiscal do lote."
+                  },
+                  "transportadora": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 255,
+                    "description": "Nome da transportadora."
+                  },
+                  "dataEntrada": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Data de entrada em ISO 8601, com até 90 dias de antecedência."
+                  },
+                  "observacoes": {
+                    "type": "string",
+                    "maxLength": 4000,
+                    "description": "Observações sobre o recebimento."
+                  },
+                  "equipamentos": {
+                    "type": "array",
+                    "maxItems": 500,
+                    "items": {
+                      "type": "object",
+                      "additionalProperties": false,
+                      "properties": {
+                        "codigoBarrasInterno": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Código de barras único do equipamento."
+                        },
+                        "tipo": {
+                          "type": "string",
+                          "enum": [
+                            "COMPUTADOR_MESA",
+                            "NOTEBOOK",
+                            "MONITOR",
+                            "IMPRESSORA",
+                            "SERVIDOR",
+                            "ROTEADOR",
+                            "CABO_ESTRUTURADO",
+                            "FONTE_ALIMENTACAO"
+                          ],
+                          "description": "Categoria do equipamento."
+                        },
+                        "marca": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Marca do fabricante."
+                        },
+                        "modelo": {
+                          "type": "string",
+                          "minLength": 1,
+                          "maxLength": 255,
+                          "description": "Modelo comercial."
+                        },
+                        "anoFabricacao": {
+                          "type": "integer",
+                          "minimum": 1950,
+                          "maximum": 2100,
+                          "description": "Ano de fabricação."
+                        },
+                        "estadoFisico": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "maximum": 6,
+                          "description": "Condição física entre 0 e 6."
+                        },
+                        "pesoQuilogramas": {
+                          "type": "number",
+                          "exclusiveMinimum": 0,
+                          "maximum": 9999999.999,
+                          "multipleOf": 0.001,
+                          "description": "Peso em quilogramas."
+                        },
+                        "posicaoNoLote": {
+                          "type": "integer",
+                          "minimum": 1,
+                          "description": "Posição única dentro do lote."
+                        }
+                      },
+                      "required": [
+                        "codigoBarrasInterno",
+                        "tipo",
+                        "marca",
+                        "modelo",
+                        "anoFabricacao",
+                        "estadoFisico",
+                        "pesoQuilogramas",
+                        "posicaoNoLote"
+                      ]
+                    },
+                    "description": "Equipamentos que compõem o lote."
+                  }
+                },
+                "required": [
+                  "notaFiscal",
+                  "transportadora"
+                ]
+              },
+              "example": {
+                "notaFiscal": "NF-1024",
+                "transportadora": "Logística Verde",
+                "equipamentos": [
+                  {
+                    "codigoBarrasInterno": "NOTEBOOK-000024",
+                    "tipo": "NOTEBOOK",
+                    "marca": "Dell",
+                    "modelo": "Latitude",
+                    "anoFabricacao": 2024,
+                    "estadoFisico": 1,
+                    "pesoQuilogramas": 2.5,
+                    "posicaoNoLote": 1
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{1,64}$"
+            },
+            "example": "lote-2026-001",
+            "in": "header",
+            "name": "idempotency-key",
+            "required": false,
+            "description": "Chave de repetição segura do pedido."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "dataEntrada": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "notaFiscal": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "transportadora": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "observacoes": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "statusProcessamento": {
+                      "type": "string",
+                      "enum": [
+                        "RECEBIDO",
+                        "EM_TRIAGEM",
+                        "TRIAGEM_CONCLUIDA",
+                        "ENCAMINHADO",
+                        "FINALIZADO"
+                      ]
+                    },
+                    "equipamentos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "codigoBarrasInterno": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Código de barras único do equipamento."
+                          },
+                          "tipo": {
+                            "type": "string",
+                            "enum": [
+                              "COMPUTADOR_MESA",
+                              "NOTEBOOK",
+                              "MONITOR",
+                              "IMPRESSORA",
+                              "SERVIDOR",
+                              "ROTEADOR",
+                              "CABO_ESTRUTURADO",
+                              "FONTE_ALIMENTACAO"
+                            ],
+                            "description": "Categoria do equipamento."
+                          },
+                          "marca": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Marca do fabricante."
+                          },
+                          "modelo": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Modelo comercial."
+                          },
+                          "anoFabricacao": {
+                            "type": "integer",
+                            "minimum": 1950,
+                            "maximum": 2100,
+                            "description": "Ano de fabricação."
+                          },
+                          "estadoFisico": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6,
+                            "description": "Condição física entre 0 e 6."
+                          },
+                          "pesoQuilogramas": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9999999.999,
+                            "multipleOf": 0.001,
+                            "description": "Peso em quilogramas."
+                          },
+                          "posicaoNoLote": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "Posição única dentro do lote."
+                          },
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "loteId": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "statusRastreamento": {
+                            "type": "string",
+                            "enum": [
+                              "AGUARDANDO_TRIAGEM",
+                              "EM_TRIAGEM",
+                              "AGUARDANDO_DESMONTE",
+                              "EM_DESMONTE",
+                              "PECAS_REAPROVEITADAS",
+                              "MATERIAL_RECICLAVEL",
+                              "DESCARTE_SEGURO",
+                              "BAIXA_DEFINITIVA"
+                            ]
+                          }
+                        },
+                        "required": []
+                      }
+                    },
+                    "pesoTotal": {
+                      "type": "number"
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/lotes/{id}": {
+      "get": {
+        "summary": "Consultar lote",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Retorna os equipamentos e o peso total de um lote da organização.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "description": "Identificador do lote."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "dataEntrada": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "notaFiscal": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "transportadora": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "observacoes": {
+                      "type": "string",
+                      "maxLength": 4000
+                    },
+                    "id": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "statusProcessamento": {
+                      "type": "string",
+                      "enum": [
+                        "RECEBIDO",
+                        "EM_TRIAGEM",
+                        "TRIAGEM_CONCLUIDA",
+                        "ENCAMINHADO",
+                        "FINALIZADO"
+                      ]
+                    },
+                    "equipamentos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                          "codigoBarrasInterno": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Código de barras único do equipamento."
+                          },
+                          "tipo": {
+                            "type": "string",
+                            "enum": [
+                              "COMPUTADOR_MESA",
+                              "NOTEBOOK",
+                              "MONITOR",
+                              "IMPRESSORA",
+                              "SERVIDOR",
+                              "ROTEADOR",
+                              "CABO_ESTRUTURADO",
+                              "FONTE_ALIMENTACAO"
+                            ],
+                            "description": "Categoria do equipamento."
+                          },
+                          "marca": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Marca do fabricante."
+                          },
+                          "modelo": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 255,
+                            "description": "Modelo comercial."
+                          },
+                          "anoFabricacao": {
+                            "type": "integer",
+                            "minimum": 1950,
+                            "maximum": 2100,
+                            "description": "Ano de fabricação."
+                          },
+                          "estadoFisico": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "maximum": 6,
+                            "description": "Condição física entre 0 e 6."
+                          },
+                          "pesoQuilogramas": {
+                            "type": "number",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9999999.999,
+                            "multipleOf": 0.001,
+                            "description": "Peso em quilogramas."
+                          },
+                          "posicaoNoLote": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "description": "Posição única dentro do lote."
+                          },
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "loteId": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "statusRastreamento": {
+                            "type": "string",
+                            "enum": [
+                              "AGUARDANDO_TRIAGEM",
+                              "EM_TRIAGEM",
+                              "AGUARDANDO_DESMONTE",
+                              "EM_DESMONTE",
+                              "PECAS_REAPROVEITADAS",
+                              "MATERIAL_RECICLAVEL",
+                              "DESCARTE_SEGURO",
+                              "BAIXA_DEFINITIVA"
+                            ]
+                          }
+                        },
+                        "required": []
+                      }
+                    },
+                    "pesoTotal": {
+                      "type": "number"
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/relatorios": {
+      "post": {
+        "operationId": "solicitarRelatorioPublico",
+        "summary": "Solicitar relatório",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Enfileira a geração de um relatório da organização e retorna a URL para consulta.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "tipo": {
+                    "type": "string",
+                    "enum": [
+                      "EFICIENCIA",
+                      "RENTABILIDADE",
+                      "VIDA_UTIL"
+                    ],
+                    "description": "Tipo de análise do relatório."
+                  },
+                  "formato": {
+                    "type": "string",
+                    "enum": [
+                      "CSV",
+                      "JSON"
+                    ],
+                    "description": "Formato do arquivo gerado."
+                  },
+                  "inicio": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Início inclusivo do período."
+                  },
+                  "fim": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Fim inclusivo do período."
+                  }
+                },
+                "required": [
+                  "tipo",
+                  "formato"
+                ]
+              },
+              "example": {
+                "tipo": "EFICIENCIA",
+                "formato": "CSV"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "tarefaId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "status": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "statusUrl": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "criadoEm": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/relatorios/{tarefaId}": {
+      "get": {
+        "summary": "Consultar tarefa",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Acompanha o progresso e informa o endereço do arquivo após a conclusão.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "tarefaId",
+            "required": true,
+            "description": "Identificador da tarefa assíncrona."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "tarefaId": {
+                      "type": "string",
+                      "format": "uuid"
+                    },
+                    "tipo": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "formato": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "status": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "progresso": {
+                      "type": "integer"
+                    },
+                    "tentativas": {
+                      "type": "integer"
+                    },
+                    "erro": {
+                      "type": "string"
+                    },
+                    "criadoEm": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "concluidaEm": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "expiraEm": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "downloadUrl": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": []
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/public/relatorios/{tarefaId}/download": {
+      "get": {
+        "summary": "Baixar relatório",
+        "tags": [
+          "API de parceiros"
+        ],
+        "description": "Baixa o arquivo CSV ou JSON concluído antes de sua expiração.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "in": "path",
+            "name": "tarefaId",
+            "required": true,
+            "description": "Identificador da tarefa assíncrona."
+          }
+        ],
+        "security": [
+          {
+            "apiKeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Default Response",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "410": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Default Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "statusCode": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    },
+                    "message": {
+                      "type": "string"
+                    },
+                    "details": {
+                      "type": "array",
+                      "items": {}
+                    },
+                    "requestId": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 255
+                    }
+                  },
+                  "required": [
+                    "statusCode",
+                    "error",
+                    "message",
+                    "details"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "apiKeyAuth": []
+    }
+  ]
+}
